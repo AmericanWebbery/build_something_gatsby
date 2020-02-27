@@ -1,8 +1,13 @@
 import React from "react"
 import { Global, css } from "@emotion/core"
+import Helmet from "react-helmet"
+import Header from "./Header"
 import "./layout.css"
+import useSiteMeta from "./hooks/useSiteMeta"
 
 const Layout = ({ children }) => {
+  const { title, description } = useSiteMeta()
+
   return (
     <>
       <Global
@@ -50,7 +55,12 @@ const Layout = ({ children }) => {
           }
         `}
       />
-      <header></header>
+      <Helmet>
+        <html lang="en" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
+      <Header />
       <main
         css={css`
           margin: 2rem auto 4rem;
